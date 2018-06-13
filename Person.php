@@ -1,7 +1,8 @@
 <?php
     class Person
     {
-        public static $counter=0;
+        const OBJECTS_LIMIT = 3;
+        private static $counter=0;
         private $firstName ='unnamed';
         private $lastName;
         public function __construct($firstName,$lastName)
@@ -9,6 +10,9 @@
             $this->firstName = $firstName;
             $this->lastName = $lastName;
             self::$counter++;
+            if(self::$counter === self::OBJECTS_LIMIT_){
+                throw new \Exception('Cannot create class object');
+            }
         }
 
         public function getFirstName()
@@ -48,4 +52,5 @@
     $person->setFirstName('Vasya');
     $person->setLastName('Petrov');
     $person2 = new Person('Nastya','Rezova');
+
 ?>
